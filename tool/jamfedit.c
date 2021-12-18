@@ -104,7 +104,8 @@ int main(int dargc, char *argv[]) {
 	}
 	if(CreatMod==0 || CreatMod==1) {
 		if(CreatMod==0) {
-			ftruncate(fileno(inputFile), 0);
+			fclose(inputFile);
+			inputFile = fopen(fileName, "w+");
 			createFile();
 			printf("\033[1;33mCreated new File\n\033[m");
 		}
