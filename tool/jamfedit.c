@@ -23,7 +23,7 @@
 Arguments:\n\
 	-C [FILE]				Creates a new File [FILE].mobileconfig (or overwrites old one) using the default template [FSG]\n\
 	-M [FILE]				Modifies an existing File [FILE]\n\
-	-G [FILE]			Retrieving instead of setting\n\
+	-G [FILE]				Retrieving instead of setting\n\
 	-u [userId]				Specifies the userId to be set [in the CheckIn URL]\n\
 	-l [locationId]			Specifies the locationId to be set [in the CheckIn URL]\n\
 	-c [companyId]			Specifies the companyId to be set [in the CheckIn URL]\n\
@@ -638,7 +638,7 @@ void processArgument(char **argv) {
 
 
 void erroredArg(char *str) {
-	printf("\033[1;31m%s\n\033m", str);
+	printf("\033[1;31m%s\n\033[m", str);
 	exit(1);
 }
 
