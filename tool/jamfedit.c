@@ -89,10 +89,10 @@ int main(int dargc, char *argv[]) {
 		printf("EnrollmentId: %d\n", enrollmentId);
 		printf("cRem: %d\n", cRem);
 		printf("accR: %d\n", accR);
-		printf("dName: %ld\n", (intptr_t)dName); 
-		printf("pName: %ld\n", (intptr_t)pName); 
-		printf("pDesc: %ld\n", (intptr_t)pDesc); 
-		printf("PayPass: %ld\n", (intptr_t)PayPass);
+		printf("dName: %d\n", (intptr_t)dName); 
+		printf("pName: %d\n", (intptr_t)pName); 
+		printf("pDesc: %d\n", (intptr_t)pDesc); 
+		printf("PayPass: %d\n", (intptr_t)PayPass);
 		printf("PayType: %d\n", PayType);
 		printf("Verbous: %d\n", verbous);
 	}
@@ -105,7 +105,7 @@ int main(int dargc, char *argv[]) {
 	else
 		erroredArg("\033[1;31mNo File specified\n\033[m");
 
-	
+
 
 	return 0;
 }
