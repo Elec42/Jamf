@@ -104,8 +104,9 @@ int main(int dargc, char *argv[]) {
 	}
 	if(CreatMod==0 || CreatMod==1) {
 		if(CreatMod==0) {
-			fclose(inputFile);
 			inputFile = fopen(fileName, "w+");
+			if(inputFile==NULL)
+				erroredArg("Could not create File");
 			createFile();
 			printf("\033[1;33mCreated new File\n\033[m");
 		}
@@ -467,8 +468,6 @@ void processArgument(char **argv) {
 			strcpy(fileName, str);
 			inputFile = fopen(str, "r+");
 			free(str);
-			if(inputFile==NULL)
-				erroredArg("Could not create File");
 			i++;
 				
 		}
