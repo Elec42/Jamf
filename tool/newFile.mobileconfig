@@ -8,7 +8,7 @@
 			<key>AccessRights</key>
 			<integer>8191</integer>
 			<key>CheckInURL</key>
-			<string>https://fsgmarbach.jamfcloud.com/checkin?company=1058303&amp;location=0652&amp;enrollmentid=e2a59c702f893b7c4ab58e477036d18d&amp;user=1234</string>
+			<string>https://fsgmarbach.jamfcloud.com/checkin?company=1058303&amp;location=0652&amp;enrollmentid=e2a59c702f893b7c4ab58e477036d18d&amp;user=799</string>
 			<key>CheckOutWhenRemoved</key>
 			<true/>
 			<key>IdentityCertificateUUID</key>
@@ -121,7 +121,7 @@
 		</dict>
 	</array>
 	<key>PayloadDescription</key>
-	<string>uhhu Nice</string>
+	<string>COOL</string>
 	<key>PayloadDisplayName</key>
 	<string>Jamf School MDM Profile (version:1)</string>
 	<key>PayloadIdentifier</key>

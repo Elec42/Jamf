@@ -106,6 +106,7 @@ int main(int dargc, char *argv[]) {
 		if(CreatMod==0) {
 			ftruncate(fileno(inputFile), 0);
 			createFile();
+			printf("\033[1;33mCreated new File\n\033[m");
 		}
 		writer();
 	}
@@ -122,7 +123,7 @@ int main(int dargc, char *argv[]) {
 
 
 void reader() {
-	printf("Reading from %s\n", fileName);
+	printf("\033[1;33mReading from %s\n\033[m", fileName);
 
 	int pos, len;
 	char *input;
@@ -286,7 +287,7 @@ void reader() {
 
 
 void writer() {
-	printf("Writing to %s\n", fileName);
+	printf("\033[1;33mWriting to %s\n\033[m", fileName);
 
 	int pos, len;
 	char *input;
@@ -457,7 +458,10 @@ void processArgument(char **argv) {
 			}
 			CreatMod=0;
 			char *str=malloc(strlen(argv[i+1])+13);
-			sprintf(str, "%s.mobileconfig", argv[i+1]);
+			if(strstr(argv[i+1], ".mobileconfig")!=NULL)
+				sprintf(str, "%s", argv[i+1]);
+			else
+				sprintf(str, "%s.mobileconfig", argv[i+1]);
 			fileName = malloc(strlen(str));
 			strcpy(fileName, str);
 			inputFile = fopen(str, "r+");
