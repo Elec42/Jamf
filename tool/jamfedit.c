@@ -14,7 +14,7 @@
 #define VersionD "\033[1mJamfedit by Felix Kröhnert (compiled "__DATE__" "__TIME__") - edit:FSGVersion\n\033[m"
 #define Version "2.0\n\033[m"
 
-#define HELPTEXT VersionD"\
+#define HELPTEXT"\
 \033[mUsage: jamfedit [arguments]\n\
 	 or: jamfedit -C [Filename] [Arguments]		creates a new File [Filename].mobileconf\n\
 	 or: jamfedit -M [Filename] [Arguments]		modifies an existing File [Filename]\n\
@@ -35,6 +35,7 @@ Arguments:\n\
 	-pDesc [description]	Sets the payload description\n\
 	-PayPass [password]		Sets current payload password\n\
 	-PayType				Gets payload type\n\
+	-all					Gets all Attributes\n\
 	-v						Verbous\n\
 	-h or --help			Print Help (this message) and exit\n\
 	--version				Print version information and exit\n\
@@ -45,7 +46,11 @@ void erroredArg(char *);
 void createFile(void);
 void insertInFile(int, char *, FILE *);
 void cutFromFile(int, int, FILE *);
-int findInFile(char *, FILE *);
+int findInFile(char *, FILE *, int);
+int getPosUrlContentString(char *, int*, FILE*, int);
+int getPosFromKey(char *, int*, FILE*, int);
+int getPosFromBooleanKey(char *, int*, FILE*, int);
+int inList(char, char[]);
 
 int i, argc;
 
@@ -69,7 +74,7 @@ int verbous = 0;
 FILE *inputFile;
 
 int main(int dargc, char *argv[]) {
-	
+	printf(VersionD);
 	argc = dargc;
 
 	if(argc<2) {
@@ -96,12 +101,171 @@ int main(int dargc, char *argv[]) {
 		printf("PayType: %d\n", PayType);
 		printf("Verbous: %d\n", verbous);
 	}
-	if(CreatMod==0)
+	if(CreatMod==0 || CreatMod==1) {
 		printf("Writing to %s\n", fileName);
-	else if(CreatMod==1)
-		printf("Writing to %s\n", fileName);
-	else if(CreatMod==2)
+	}
+	else if(CreatMod==2) {
 		printf("Reading from %s\n", fileName);
+
+		int pos, len;
+		char *input;
+
+		if(userId == -2) {
+			pos=getPosUrlContentString("user=", &len, inputFile, 1);
+			if(pos<0) {
+				printf("Cannot read 'userId'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mUser ID: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(locationId == -2) {
+			pos=getPosUrlContentString("location=", &len, inputFile, 1);
+			if(pos<0) {
+				printf("Cannot read 'locationId'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mLocation ID: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(companyId == -2) {
+			pos=getPosUrlContentString("company=", &len, inputFile, 1);
+			if(pos<0) {
+				printf("Cannot read 'companyId'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mCompany ID: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(enrollmentId == -2) {
+			pos=getPosUrlContentString("enrollmentid=", &len, inputFile, 1);
+			if(pos<0) {
+				printf("Cannot read 'enrollmentId'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mEnrollment ID: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(cRem == -2) {
+			pos=getPosFromBooleanKey("CheckOutWhenRemoved", &len, inputFile, 1);
+			if(pos<0) {
+				printf("Cannot read 'CheckOutWhenRemoved'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mCheckOutWhenRemoved: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(accR == -2) {
+			pos=getPosFromKey("AccessRights", &len, inputFile, 1);
+			if(pos<0) {
+				printf("Cannot read 'AccessRights'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mAccessRights: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(dName == -2) {
+			pos=getPosFromKey("PayloadDisplayName", &len, inputFile, 1);
+			if(pos<0) {
+				printf("Cannot read 'PayloadDisplayName'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mPayloadDisplayName: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(pName == -2) {
+			pos=getPosFromKey("PayloadDisplayName", &len, inputFile, -1);
+			if(pos<0) {
+				printf("Cannot read 'PayloadDisplayName'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mPayloadDisplayName: %s\n\033[m", input);
+				free(input);
+			}
+		} 
+		if(pDesc == -2) {
+			pos=getPosFromKey("PayloadDescription", &len, inputFile, -1);
+			if(pos<0) {
+				printf("Cannot read 'PayloadDescription'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mPayloadDescription: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(PayPass == -2) {
+			pos=getPosFromKey("Password", &len, inputFile, -1);
+			if(pos<0) {
+				printf("Cannot read 'Password'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mPassword: %s\n\033[m", input);
+				free(input);
+			}
+		}
+		if(PayType == -2) {
+			pos=getPosFromKey("PayloadType", &len, inputFile, -1);
+			if(pos<0) {
+				printf("Cannot read 'PayloadType'\n");
+			}
+			else {
+				fseek(inputFile, pos, SEEK_SET);
+				input = malloc(len+1);
+				fread(input, 1, len, inputFile);
+				input[len]='\0';
+				printf("\033[1;33mPayloadType: %s\n\033[m", input);
+				free(input);
+			}
+		}
+
+	}
 	else
 		erroredArg("\033[1;31mNo File specified\n\033[m");
 
@@ -124,6 +288,7 @@ void processArgument(char **argv) {
 			fileName = malloc(strlen(str));
 			strcpy(fileName, str);
 			inputFile = fopen(str, "w+");
+			free(str);
 			if(inputFile==NULL)
 				erroredArg("Could not create File");
 			createFile();
@@ -261,18 +426,34 @@ void processArgument(char **argv) {
 			verbous = 1;	
 		}
 		else if(strcmp(argv[i], "-PayType") == 0) {
-			PayType = 1;
+			PayType = -2;
+		}
+		else if(strcmp(argv[i], "-all") == 0) {
+			if(CreatMod!=2) {
+				erroredArg("Cannot use -all without first specifying --get");
+			}
+			userId = -2;
+			locationId = -2;
+			companyId = -2;
+			enrollmentId = -2;
+			cRem = -2;
+			accR = -2;
+			dName = -2;
+			pName = -2;
+			pDesc = -2;
+			PayPass = -2;
+			PayType = -2;
 		}
 		else if(strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
 			printf(HELPTEXT);
 			exit(0);
 		}
 		else if(strcmp(argv[i], "--version") == 0) {
-			printf(VersionD Version);
+			printf(Version);
 			exit(0);
 		}
 		else {
-			printf(VersionD"Unknown argument '%s'\nMore info with: 'jamfedit -h'\n", argv[i]);
+			printf("Unknown argument '%s'\nMore info with: 'jamfedit -h'\n", argv[i]);
 			exit(2);
 		}
 	}
@@ -281,7 +462,7 @@ void processArgument(char **argv) {
 
 
 void erroredArg(char *str) {
-	printf("%s\n", str);
+	printf("\033[1;31m%s\n\033m", str);
 	exit(1);
 }
 
@@ -340,19 +521,90 @@ void cutFromFile(int start, int end, FILE *fp) {
 
 }
 
-int findInFile(char *str, FILE *fp) {
+int findInFile(char *str, FILE *fp, int dir) {
 	fseek(fp, -strlen(str), SEEK_END);
 	int pos=ftell(fp);
 	int len = strlen(str);
 	char buf[len];
+	int val=-1;
 
 	while(pos==ftell(fp)) {
 		int rl=fread(buf, 1, len, fp);
 		pos+=rl;
 		buf[rl]='\0';
-		if(strcmp(buf, str) == 0) return ftell(fp);
+		if(strcmp(buf, str) == 0) {
+			if(dir<0)
+				return ftell(fp);
+			else
+				val=ftell(fp);
+		}
 		fseek(fp, - len - 1, SEEK_CUR);
 		pos = pos - len - 1;
 	}
-	return -1;
+	return val;
+}
+
+int inList(char chr, char list[]) {
+
+	for(int i=0; i<strlen(list); i++) {
+		if(list[i]==chr) return 1;
+	}
+	return 0;
+}
+
+
+int getPosUrlContentString(char *str, int* len, FILE *fp, int dir) {
+	*len=0;
+	int pos=findInFile(str, fp, dir);
+	if(pos<0) return -1;
+
+	fseek(fp, pos, SEEK_SET);
+
+	char list[] = "<&;", buf;
+	while(fread(&buf, 1, 1, fp)>0 && !inList(buf, list)) {
+		*len+=1;
+	}
+	return pos;
+}
+
+int getPosFromKey(char *str, int* len, FILE *fp, int dir) {
+	*len=0;
+	char keyBuilder[12+strlen(str)];
+	strcpy(keyBuilder, "<key>");
+	strcat(keyBuilder, str);
+	strcat(keyBuilder, "</key>");
+
+	int pos = findInFile(keyBuilder, fp, dir);
+	fseek(fp, pos, SEEK_SET);
+
+	char buf;
+	int rl;
+	while((rl=fread(&buf, 1, 1, fp))>0&&buf!='>') pos++;
+	if(rl<=0) return -1;
+	pos++;
+	while((rl=fread(&buf, 1, 1, fp))>0&&buf!='<') *len+=1;
+	if(rl<=0) return -1;
+
+	return pos;
+}
+
+int getPosFromBooleanKey(char *str, int* len, FILE *fp, int dir) {
+	*len=0;
+	char keyBuilder[12+strlen(str)];
+	strcpy(keyBuilder, "<key>");
+	strcat(keyBuilder, str);
+	strcat(keyBuilder, "</key>");
+
+	int pos = findInFile(keyBuilder, fp, dir);
+	fseek(fp, pos, SEEK_SET);
+
+	char buf;
+	int rl;
+	while((rl=fread(&buf, 1, 1, fp))>0&&buf!='<') pos++;
+	if(rl<=0) return -1;
+	pos++;
+	while((rl=fread(&buf, 1, 1, fp))>0&&buf!='/') *len+=1;
+	if(rl<=0) return -1;
+
+	return pos;
 }
