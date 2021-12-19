@@ -30,6 +30,8 @@ Arguments:\n\
 	-e [enrollmentId]		Specifies the enrollmentId to be set [in the ChekIn URL]\n\
 	-cRem [boolean]			Specifies whether to log out when profile is removed\n\
 	-accR [Id]			Specifies the access rights\n\
+		accR: 3 -> allow to change profile\n\
+		accR: 4099 -> allow to change profile and manage apps (recommended)\n\
 	-dName [displayName]		Sets the displayName -> Defaults to [FILE]\n\
 	-pName [displayName]		Sets the payload display name\n\
 	-pDesc [description]		Sets the payload description\n\
