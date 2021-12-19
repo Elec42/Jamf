@@ -660,17 +660,17 @@ void insertInFile(int index, char *str, FILE *fp) {
 	fseek(fp, index, SEEK_SET);
 	
 	char buf1[strlen(str)+1], buf2[strlen(str)+1];
-	int rl, sl=strlen(str);
+	int rl, sl=strlen(str), lrl=strlen(str);
 	strcpy(buf1, str);
-
 
 	do {
 		rl=fread(buf2, 1, sl, fp);
 		buf2[rl]='\0';
 		fseek(fp, -rl, SEEK_CUR);
-		fwrite(buf1, 1, strlen(buf1), fp);
-		memcpy(buf1, buf2, rl);
-	} while(rl>0&&strlen(buf1)>0);	
+		fwrite(buf1, 1, lrl, fp);
+		lrl=rl;
+		strcpy(buf1, buf2);
+	} while(rl>0);	
 
 	fseek(fp, index+sl, SEEK_SET);
 }
