@@ -10,7 +10,7 @@ char template[]="\
 			<key>AccessRights</key>\n\
 			<integer>8191</integer>\n\
 			<key>CheckInURL</key>\n\
-			<string>https://fsgmarbach.jamfcloud.com/checkin?company=1058303&amp;location=0652&amp;enrollmentid=f2a59c702f893b7c4ab58e477036d18d&amp;user=xxx</string>\n\
+			<string>https://fsgmarbach.jamfcloud.com/checkin?company=1058303&amp;location=0652&amp;enrollmentid=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&amp;user=xxx</string>\n\
 			<key>CheckOutWhenRemoved</key>\n\
 			<true/>\n\
 			<key>IdentityCertificateUUID</key>\n\

@@ -1,3 +1,4 @@
 *.out
-tool/*.mobileconfig
+*.mobileconfig
 tool/jamfedit
+!/Profiles/*.mobileconfig
