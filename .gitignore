@@ -1,4 +1,6 @@
 *.out
 *.mobileconfig
 tool/jamfedit
+tool/MDM-Protocol-Reference.pdf
+tool/run.sh
 Profiles
