@@ -8,8 +8,8 @@
 			<key>AccessRights</key>
 			<integer>8191</integer>
 			<key>CheckInURL</key>
-			<string>https://fsgmarbach.jamfcloud.com/checkin?company=1058303&amp;location=0652&amp;enrollmentid=e2a59c702f893b7c4ab58e477036d18d&amp;user=799</string>
-			<key>CheckOutWhenRemoved</key>
+			<string>https://fsgmarbach.jamfcloud.com/checkin?company=1058303&amp;location=0652&amp;enrollmentid=f2a59c702f893b7c4ab58e477036d18d&amp;user=799</string>
+			<key>eckOutWhenRemoved</key>
 			<true/>
 			<key>IdentityCertificateUUID</key>
 			<string>2e3813b0-1c65-4bfc-81ca-4e2a85d548d9</string>
@@ -137,4 +137,4 @@
 	<key>PayloadVersion</key>
 	<integer>1</integer>
 </dict>
-</plist>
+</plisteger>1</in

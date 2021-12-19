@@ -92,7 +92,7 @@ int main(int dargc, char *argv[]) {
 		printf("UserId: %d\n", userId);
 		printf("LocationId: %d\n", locationId);
 		printf("CompanyId: %d\n", companyId);
-		printf("EnrollmentId: %d\n", enrollmentId);
+		printf("EnrollmentId: %s\n", enrollmentId);
 		printf("cRem: %d\n", cRem);
 		printf("accR: %d\n", accR);
 		printf("dName: %d\n", (intptr_t)dName); 
@@ -659,16 +659,17 @@ void insertInFile(int index, char *str, FILE *fp) {
 	if(index<0 || index > ftell(fp)) return;
 	fseek(fp, index, SEEK_SET);
 	
-	char buf1[strlen(str)], buf2[strlen(str)];
+	char buf1[strlen(str)+1], buf2[strlen(str)+1];
 	int rl, sl=strlen(str);
 	strcpy(buf1, str);
+
 
 	do {
 		rl=fread(buf2, 1, sl, fp);
 		buf2[rl]='\0';
 		fseek(fp, -rl, SEEK_CUR);
 		fwrite(buf1, 1, strlen(buf1), fp);
-		strcpy(buf1, buf2);
+		memcpy(buf1, buf2, rl);
 	} while(rl>0);	
 
 	fseek(fp, index+sl, SEEK_SET);
