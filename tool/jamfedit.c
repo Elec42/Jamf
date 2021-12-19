@@ -670,7 +670,7 @@ void insertInFile(int index, char *str, FILE *fp) {
 		fseek(fp, -rl, SEEK_CUR);
 		fwrite(buf1, 1, strlen(buf1), fp);
 		memcpy(buf1, buf2, rl);
-	} while(rl>0);	
+	} while(rl>0&&strlen(buf1)>0);	
 
 	fseek(fp, index+sl, SEEK_SET);
 }
