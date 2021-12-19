@@ -21,24 +21,24 @@
 	 or: jamfedit -G [Arguments]			Prints requested Attributes\n\
 \n\
 Arguments:\n\
-	-C [FILE]				Creates a new File [FILE].mobileconfig (or overwrites old one) using the default template [FSG]\n\
-	-M [FILE]				Modifies an existing File [FILE]\n\
-	-G [FILE]				Retrieving instead of setting\n\
-	-u [userId]				Specifies the userId to be set [in the CheckIn URL]\n\
+	-C [FILE]			Creates a new File [FILE].mobileconfig (or overwrites old one) using the default template [FSG]\n\
+	-M [FILE]			Modifies an existing File [FILE]\n\
+	-G [FILE]			Retrieving instead of setting\n\
+	-u [userId]			Specifies the userId to be set [in the CheckIn URL]\n\
 	-l [locationId]			Specifies the locationId to be set [in the CheckIn URL]\n\
 	-c [companyId]			Specifies the companyId to be set [in the CheckIn URL]\n\
 	-e [enrollmentId]		Specifies the enrollmentId to be set [in the ChekIn URL]\n\
 	-cRem [boolean]			Specifies whether to log out when profile is removed\n\
-	-accR [Id]				Specifies the access rights\n\
-	-dName [displayName]	Sets the displayName -> Defaults to [FILE]\n\
-	-pName [displayName]	Sets the payload display name\n\
-	-pDesc [description]	Sets the payload description\n\
+	-accR [Id]			Specifies the access rights\n\
+	-dName [displayName]		Sets the displayName -> Defaults to [FILE]\n\
+	-pName [displayName]		Sets the payload display name\n\
+	-pDesc [description]		Sets the payload description\n\
 	-PayPass [password]		Sets current payload password\n\
-	-PayType				Gets payload type\n\
-	-all					Gets all Attributes\n\
-	-v						Verbous\n\
+	-PayType			Gets payload type\n\
+	-all				Gets all Attributes\n\
+	-v				Verbous\n\
 	-h or --help			Print Help (this message) and exit\n\
-	--version				Print version information and exit\n\
+	--version			Print version information and exit\n\
 "
 
 void processArgument(char **);
