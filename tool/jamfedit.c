@@ -12,7 +12,7 @@
 
 
 #define VersionD "\033[1mJamfedit by Felix Kröhnert (compiled "__DATE__" "__TIME__") - edit:FSGVersion\n\033[m"
-#define Version "2.4\n\033[m"
+#define Version "2.4.2\n\033[m"
 
 #define HELPTEXT"\
 \033[mUsage: jamfedit [arguments]\n\
